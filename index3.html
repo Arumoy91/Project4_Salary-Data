@@ -1,0 +1,74 @@
+import pandas as pd
+df=pd.read_csv('salary.csv')
+df
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+sns.heatmap(df.isnull(),annot=True)
+
+df.head()
+
+df.describe()
+
+df.info()
+
+df.isnull().sum()
+
+df['Salary'].fillna(df['Salary'].mean(),inplace=True)
+
+df['College'].fillna(df['College'].mode(),inplace=True)
+
+df.isnull().sum()
+
+df.shape
+
+df.drop(columns=['College'],inplace=True)
+
+df.isnull().sum()
+
+df.skew()
+
+x=df['Age']
+y=df['Salary']
+
+sns.countplot(df['Age'],hue=df['Team'])
+pd.crosstab(df['Team'],df['Age']).apply(lambda r:round((r/r.sum())*100,1),axis=1)
+
+print(df['Salary'].skew())
+
+print(df['Age'].skew())
+
+sns.boxplot(df['Salary'])
+
+sns.countplot(df['Salary'],hue=df['Age'])
+pd.crosstab(df['Age'],df['Salary']).apply(lambda r:round((r/r.sum())*100,1),axis=0)
+
+sns.pairplot(df)
+
+dfcorr=df.corr()
+dfcorr
+
+sns.heatmap(df.corr())
+
+sns.countplot(df['Salary'],hue=df['Position'])
+pd.crosstab(df['Position'],df['Salary']).apply(lambda r:round((r/r.sum())*100,1),axis=1)
+
+df.sample(5)
+
+x=df.drop('Salary',1)
+df['Age']=df['Age'].astype('category')
+y=df['Age']
+
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.20,random_state=58)
+
+x_train
+
+y_train
+
+x_test
+
+y_test
+
+sns.jointplot(x='Age',y='Salary',kind="kde",data=df)
+plt.show()
+
